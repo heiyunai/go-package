@@ -1,6 +1,7 @@
 package email
 
 import (
+	"crypto/tls"
 	"fmt"
 	"net/smtp"
 
@@ -29,10 +30,14 @@ func NewEmailer(conf *Config) *Emailer {
 
 func (er *Emailer) SendSmtpEmail(email, content string) error {
 	e := eemail.NewEmail()
+
 	e.Subject = er.conf.Subject
 	e.From = fmt.Sprintf("%s <%s>", er.conf.Owner, er.conf.Email)
 
 	e.To = append(e.To, email)
 	e.Text = []byte(content)
-	return e.Send(fmt.Sprintf("%s:%v", er.conf.Host, er.conf.Port), smtp.PlainAuth("", er.conf.Email, er.conf.Password, er.conf.Host))
+
+	return e.SendWithTLS(fmt.Sprintf("%s:%v", er.conf.Host, er.conf.Port), smtp.PlainAuth("", er.conf.Email, er.conf.Password, er.conf.Host), &tls.Config{
+		ServerName: er.conf.Host,
+	})
 }

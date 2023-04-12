@@ -12,10 +12,10 @@ func Test_emailer_SendSmtpEmail(t *testing.T) {
 		Owner:   "黑云科技",
 
 		Email:    "1213383851@qq.com",
-		Password: "jduodyunajwkfhci",
+		Password: "uvyctonpgyogbaaj",
 		Host:     "smtp.qq.com",
-		Port:     587,
+		Port:     465,
 	})
 
-	assert.NoError(t, emailer.SendSmtpEmail("13545826685@163.com", "hello world"))
+	assert.NoError(t, emailer.SendSmtpEmail("1213383851@qq.com", "hello world"))
 }
