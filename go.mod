@@ -1,4 +1,4 @@
-module github.com/heiyunaii/go-package
+module github.com/heiyunai/go-package
 
 go 1.20
 
