@@ -1,4 +1,4 @@
-package email
+package cmail
 
 import (
 	"crypto/tls"
@@ -18,17 +18,17 @@ type Config struct {
 	Port     int    //邮箱端口 smtp 465/587
 }
 
-type Emailer struct {
+type Mailer struct {
 	conf *Config
 }
 
-func NewEmailer(conf *Config) *Emailer {
-	return &Emailer{
+func NewMailer(conf *Config) *Mailer {
+	return &Mailer{
 		conf: conf,
 	}
 }
 
-func (er *Emailer) SendSmtpEmail(email, content string) error {
+func (er *Mailer) SendSmtpMail(email, content string) error {
 	e := eemail.NewEmail()
 
 	e.Subject = er.conf.Subject
